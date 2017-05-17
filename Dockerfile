@@ -11,6 +11,8 @@ RUN apt-get update \
 
 COPY controller*.zip /root/controller.zip
 
+RUN ls
+
 COPY response.varfile /root/
 
 
@@ -21,8 +23,9 @@ RUN ls -alh /root/ \
 
 
 RUN  chmod +x /root/controller/controller.sh \
+  && echo serverHostName=`hostname` >> /root/response.varfile \
   && /root/controller/controller.sh -q -varfile /root/response.varfile
 
-EXPOSE 8080
+EXPOSE 8090
 
-CMD [ "/bin/bash" ]
+CMD [ "/home/appduser/AppDynamics/Controller/bin/startController.sh" ]

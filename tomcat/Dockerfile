@@ -129,12 +129,16 @@ RUN set -e \
 
 
 
-COPY AppServerAgent-4.3.0.0.zip /root/
+COPY AppServerAgent* /root/AppServerAgent.zip
 RUN apt-get update && apt-get install -y unzip \
   && cd /root/ \
-  && unzip AppServerAgent-4.3.0.0.zip -d appagent 
+  && unzip AppServerAgent.zip -d appagent 
 
 ENV JAVA_OPTS -javaagent:/root/appagent/javaagent.jar
 
+COPY start.sh /root/
+
+RUN chmod +x /root/start.sh
+
 EXPOSE 8080
-CMD ["catalina.sh", "run"]
+CMD ["/root/start.sh"]
