@@ -26,6 +26,6 @@ RUN  chmod +x /root/controller/controller.sh \
   && echo serverHostName=`hostname` >> /root/response.varfile \
   && /root/controller/controller.sh -q -varfile /root/response.varfile
 
-EXPOSE 8090
+EXPOSE 8080, 8443
 
 CMD [ "/home/appduser/AppDynamics/Controller/bin/startController.sh" ]
